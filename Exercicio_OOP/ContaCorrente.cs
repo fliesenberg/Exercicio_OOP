@@ -18,10 +18,7 @@ public class ContaCorrente : Conta
         decimal limite = this.Saldo + ContaCorrente.LIMITE_SAQUE;
 
         if (valor > limite)
-        {
-            Console.WriteLine("Não é possível sacar o valor solicitado! O limite de saque é o seu saldo atual mais R$ " + ContaCorrente.LIMITE_SAQUE);
-            return;
-        }
+            throw new SaldoInsuficienteException("Limite insuficiente!");
 
         this.Saldo -= valor;
         Console.WriteLine("Foi sacado R$ " + valor);

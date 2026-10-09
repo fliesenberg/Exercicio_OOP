@@ -21,6 +21,9 @@ public abstract class Conta
 
     public void Depositar(decimal valor)
     {
+        if (valor < 0)
+            throw new ArgumentException("Valor para depósito deve ser positivo!");
+
         this.Saldo += valor;
         Console.WriteLine("Foi depositado R$ " + valor);
     }
@@ -28,10 +31,7 @@ public abstract class Conta
     public virtual void Sacar(decimal valor)
     {
         if (valor > this.Saldo)
-        {
-            Console.WriteLine("Não é possível sacar um valor maior que o saldo atual!")    ;
-            return;
-        }
+            throw new SaldoInsuficienteException("Saldo insuficiente!");
 
         this.Saldo -= valor;
         Console.WriteLine("Foi sacado R$ " + valor);
